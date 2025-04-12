@@ -1,0 +1,42 @@
+{
+    "login": {
+      "title": "Daxil Olun",
+      "subtitle": "Sisteminizə giriş üçün məlumatlarınızı daxil edin",
+      "username": "İstifadəçi adı",
+      "password": "Şifrə",
+      "keep_logged_in": "Məni yadda saxla",
+      "forgot_password": "Şifrəmi unutdum",
+      "submit": "Daxil Ol",
+      "back": "Geri",
+      "error": "İstifadəçi adı və ya şifrə yanlışdır!",
+      "reset": {
+        "current_password": "Cari şifrə",
+        "new_password": "Yeni şifrə",
+        "confirm_password": "Yeni şifrəni təsdiqlə",
+        "change": "Dəyişdir",
+        "wrong_current": "Cari şifrə yanlışdır!",
+        "mismatch": "Yeni şifrə ilə təsdiq uyğun gəlmir!",
+        "empty": "Yeni şifrə boş ola bilməz!",
+        "success": "Şifrə uğurla dəyişdirildi!"
+      },
+      "left": {
+        "title": "Maliyyə İdarəetmə Sistemi",
+        "description": "Büdcənizi idarə edin, xərclərinizi izləyin və maliyyə hədəflərinizə çatmaq üçün ağıllı qərarlar qəbul edin.",
+        "features": {
+          "real_time": "Real vaxt rejimində balans izləmə",
+          "records": "Xərc və gəlir qeydləri",
+          "profile": "Şəxsi profil idarəetmə"
+        },
+        "footer": "© 2025 Maliyyə İdarəetmə"
+      }
+    },
+    "sidebar": {
+      
+    },
+    "navbar": {
+      "main": "Əsas",
+      "addexpense": "Xərc əlavə et",
+      "expensedetails": "Xərc məlumatları",
+      "websiteabout": "Sayt haqqında"
+    }
+  }

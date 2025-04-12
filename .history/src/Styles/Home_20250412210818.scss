@@ -1,0 +1,122 @@
+@import "../assets/Fonts/fonts.scss";
+
+.home-container {
+  height: 100%; /* Full viewport height */
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 20px; /* Minimal padding */
+  box-sizing: border-box;
+  overflow-y: auto; /* Scroll if content overflows */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family-regular, sans-serif;
+
+  .chart-wrapper {
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    canvas {
+      width: 100% !important; /* Ensure chart fills container */
+      height: 100% !important; /* Full height */
+      max-height: 600px; /* Cap height for large screens */
+    }
+
+    .no-data {
+      font-size: 1.5rem;
+      color: #fff;
+      text-align: center;
+      font-style: italic;
+      opacity: 0.8;
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home-container {
+    width: 100vw; /* Full width on smaller screens */
+    margin-left: 0; /* No sidebar offset */
+    padding: 15px;
+
+    .chart-wrapper {
+      padding: 15px;
+
+      canvas {
+        max-height: 400px; /* Smaller chart on tablets */
+      }
+
+      .no-data {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 10px;
+
+    .chart-wrapper {
+      padding: 10px;
+
+      canvas {
+        max-height: 300px; /* Smaller chart on mobile */
+      }
+
+      .no-data {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.homeLoader {
+  width: fit-content;
+  font-size: 40px;
+  font-family: monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0000;
+  -webkit-text-stroke: 1px #000;
+  --g: conic-gradient(#000 0 0) no-repeat text;
+  background: var(--g) 0, var(--g) 1ch, var(--g) 2ch, var(--g) 3ch, var(--g) 4ch,
+    var(--g) 5ch, var(--g) 6ch;
+  background-position-y: 100%;
+  animation: l15 3s infinite;
+}
+.homeLoader:before {
+  content: "FINANCE";
+}
+@keyframes l15 {
+  0% {
+    background-size: 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0;
+  }
+  14.28% {
+    background-size: 1ch 100%, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0;
+  }
+  28.57% {
+    background-size: 1ch 100%, 1ch 100%, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0;
+  }
+  42.85% {
+    background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 0, 1ch 0, 1ch 0, 1ch 0;
+  }
+  57.14% {
+    background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 0, 1ch 0, 1ch 0;
+  }
+  71.43% {
+    background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 0,
+      1ch 0;
+  }
+  85.71% {
+    background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%,
+      1ch 0;
+  }
+  100% {
+    background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%,
+      1ch 100%;
+  }
+}

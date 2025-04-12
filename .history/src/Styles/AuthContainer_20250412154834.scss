@@ -1,0 +1,55 @@
+.authContainer{
+.authContainerLeft {
+    width: 60%;
+    background: linear-gradient(180deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+  
+    .dottieContainer {
+      width: 100%;
+    }
+  
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        font-size: 1rem;
+        margin: 15px 0;
+        position: relative;
+        padding-left: 25px;
+  
+        &:before {
+          content: "✓";
+          position: absolute;
+          left: 0;
+          color: #2ecc71;
+          font-weight: bold;
+        }
+      }
+    }
+  
+    .authContainerLeft-footer {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  }

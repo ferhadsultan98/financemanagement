@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Quicksand-Light';
+  src: url('../assets/fonts/Quicksand-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Quicksand-Regular';
+  src: url('../assets/fonts/Quicksand-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-family-light: 'Quicksand-Light';
+$font-family-regular: 'Quicksand-Regular';
+$font-family-medium: 'Quicksand-Medium';
+$font-family-semibold: 'Quicksand-SemiBold';
+$font-family-bold: 'Quicksand-Bold';

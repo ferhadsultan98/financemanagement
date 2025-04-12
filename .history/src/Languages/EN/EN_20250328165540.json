@@ -1,0 +1,64 @@
+{
+  "login": {
+    "title": "Log In",
+    "subtitle": "Enter your details to access the system",
+    "username": "Username",
+    "password": "Password",
+    "keep_logged_in": "Keep me logged in",
+    "forgot_password": "Forgot Password",
+    "submit": "Log In",
+    "back": "Back",
+    "error": "Username or password is incorrect!",
+    "reset": {
+      "current_password": "Current Password",
+      "new_password": "New Password",
+      "confirm_password": "Confirm New Password",
+      "change": "Change",
+      "wrong_current": "Current password is incorrect!",
+      "mismatch": "New password and confirmation do not match!",
+      "empty": "New password cannot be empty!",
+      "success": "Password successfully changed!"
+    },
+    "left": {
+      "title": "Financial Management System",
+      "description": "Manage your budget, track your expenses, and make smart decisions to achieve your financial goals.",
+      "features": {
+        "real_time": "Real-time balance tracking",
+        "records": "Expense and income records",
+        "profile": "Personal profile management"
+      },
+      "footer": "© 2025 Financial Management"
+    }
+  },
+  "sidebar": {
+    "viewprofile": "View Profile",
+    "balance": "Balance",
+    "addmoney": "Add Money",
+    "moneyincrease": "Increase",
+    "logout": "Logout",
+    "logoutmessage": "Logged out",
+    "updatemessage": "Profile updated",
+     "invalidamount": "Invalid amount"
+  },
+  "profilemodal": {
+    "edit": "Edit Profile",
+    "name": "First Name",
+    "surname": "Last Name",
+    "date": "Date of Birth",
+    "gender": "Gender",
+    "man": "Male",
+    "woman": "Female",
+    "other": "Other",
+    "save": "Save",
+    "close": "Close"
+  },
+  "navbar": {
+    "main": "Main",
+    "addexpense": "Add Expense",
+    "expensedetails": "Expense Details",
+    "websiteabout": "About Website"
+  },
+  "home": {
+    "nodata": "No expense data yet"
+  }
+}

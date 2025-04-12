@@ -1,0 +1,76 @@
+@import "../assets/Fonts/fonts.scss";
+
+.home-container {
+  height: 100%; /* Full viewport height */
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 20px; /* Minimal padding */
+  box-sizing: border-box;
+  overflow-y: auto; /* Scroll if content overflows */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family-regular, sans-serif;
+
+  .chart-wrapper {
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    canvas {
+      width: 100% !important; /* Ensure chart fills container */
+      height: 100% !important; /* Full height */
+      max-height: 600px; /* Cap height for large screens */
+    }
+
+    .no-data {
+      font-size: 1.5rem;
+      color: #fff;
+      text-align: center;
+      font-style: italic;
+      opacity: 0.8;
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home-container {
+    width: 100vw; /* Full width on smaller screens */
+    margin-left: 0; /* No sidebar offset */
+    padding: 15px;
+
+    .chart-wrapper {
+      padding: 15px;
+
+      canvas {
+        max-height: 400px; /* Smaller chart on tablets */
+      }
+
+      .no-data {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 10px;
+
+    .chart-wrapper {
+      padding: 10px;
+
+      canvas {
+        max-height: 300px; /* Smaller chart on mobile */
+      }
+
+      .no-data {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+.homeLoader

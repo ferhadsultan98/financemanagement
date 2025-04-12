@@ -351,7 +351,7 @@
   tr {
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
   }
   th {
     background: var(--background-color);
@@ -368,7 +368,7 @@
 
     &:hover {
       background: var(--background-color);
-     
+      transform: scale(1.01);
     }
   }
 
@@ -447,10 +447,6 @@
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  .page-numbers{
-    display: flex;
-    gap: 3px;
-  }
 }
 
 .pagination-button {

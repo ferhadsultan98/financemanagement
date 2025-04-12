@@ -343,16 +343,17 @@
 
   th,
   td {
-    width: 100%;
     padding: 1rem;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
   }
-  tr {
-    display: flex;
-    justify-content: space-between;
+tr{
+  display: flex;
+  width: 50vw;
+  justify-content: space-between;
+  align-items: center;
 
-  }
+}
   th {
     background: var(--background-color);
     color: var(--muted-text);
@@ -361,6 +362,7 @@
     position: sticky;
     top: 0;
     z-index: 5;
+   
   }
 
   tbody tr {
@@ -368,7 +370,7 @@
 
     &:hover {
       background: var(--background-color);
-     
+      transform: scale(1.01);
     }
   }
 
@@ -447,10 +449,6 @@
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  .page-numbers{
-    display: flex;
-    gap: 3px;
-  }
 }
 
 .pagination-button {

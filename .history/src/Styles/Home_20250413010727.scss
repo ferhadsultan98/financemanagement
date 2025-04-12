@@ -280,7 +280,7 @@ $transition: all 0.3s ease;
           
           .transaction-amount {
             font-size: 1.1rem;
-
+            font-family: $font-family-bold, 'Roboto', sans-serif;
             color: #fff;
             flex-shrink: 0;
           }
@@ -308,7 +308,7 @@ $transition: all 0.3s ease;
   &:before {
     content: "FINANCE";
     font-size: 3rem;
-
+    font-family: $font-family-bold, monospace;
     font-weight: bold;
     letter-spacing: 4px;
     text-transform: uppercase;

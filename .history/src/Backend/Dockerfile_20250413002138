@@ -1,0 +1,15 @@
+# Python image
+FROM python:3.10-slim
+
+# Workdir
+WORKDIR /app
+
+# Requirements varsa yüklə
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Kodu konteynerə köçür
+COPY . .
+
+# Başlanğıc komanda (əgər docker-compose-dan verilirsə, buranı silə bilərsən)
+CMD ["python", "auth.py"]

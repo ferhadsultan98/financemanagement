@@ -1,0 +1,16 @@
+.layout {
+  position: relative;
+  .main-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100vw - 300px);
+    height: 100vh;
+  }
+  @media (max-width: 768px) {
+    .main-content {
+      background-color: red;
+      left: 0;
+    }
+  }
+}

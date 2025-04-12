@@ -80,7 +80,7 @@ $shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
 
     @media (min-width: 1025px) {
-      transform: translateX(0) !important
+      display: none;
     }
   }
 
@@ -457,7 +457,7 @@ $shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   // Collapsed sidebar styles for mobile
   @media (max-width: 1024px) {
     .sidebar {
-      transform: translateX(-100%);
+ 
       box-shadow: none;
       
       &.open {

@@ -80,7 +80,7 @@ $shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
 
     @media (min-width: 1025px) {
-      transform: translateX(0) !important
+      display: none;
     }
   }
 
@@ -324,7 +324,7 @@ $shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
               width: 4px;
               height: 100%;
               background: $secondary-gradient;
-              transform: translateX(-100%);
+          
               transition: $transition;
               border-radius: 0 2px 2px 0;
             }

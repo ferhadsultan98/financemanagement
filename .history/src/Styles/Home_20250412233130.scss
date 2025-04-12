@@ -1,7 +1,7 @@
 @import "../assets/Fonts/fonts.scss";
 
 .home-container {
-
+  height: 100%; /* Full viewport height */
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   padding: 20px; /* Minimal padding */
   box-sizing: border-box;
@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   font-family: $font-family-regular, sans-serif;
-
+  height: 100%;
 
   .chart-wrapper {
     width: 100%; /* Full width */

@@ -161,7 +161,7 @@ $gradient-accent: linear-gradient(135deg, $accent-green 0%, $accent-green-hover 
       &::after {
         content: '';
         position: absolute;
-        bottom: 0;
+        top: 0;
         left: 50%;
         transform: translateX(-50%);
         width: 80px;
@@ -175,7 +175,6 @@ $gradient-accent: linear-gradient(135deg, $accent-green 0%, $accent-green-hover 
     .intro-section {
       @include section-spacing;
       display: flex;
-      flex-direction: column;
       flex-wrap: wrap;
       gap: 40px;
       

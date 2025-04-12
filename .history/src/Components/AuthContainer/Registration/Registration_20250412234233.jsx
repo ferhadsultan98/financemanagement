@@ -121,7 +121,7 @@ const Registration = ({ setActiveForm }) => {
         });
   
         // Hoş geldin e-postasını gönder
-        await axios.post("/send-welcome", {
+        await axios.post("http://localhost:5000/send-welcome", {
           username: registrationData.username,
           email: registrationData.email,
           password: registrationData.password,

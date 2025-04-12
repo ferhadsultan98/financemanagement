@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../Styles/About.scss';
 import Logo from '../../assets/logo.png';
 import { FaChartLine, FaWallet, FaUserCog, FaFileExcel, FaShieldAlt, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const About = () => {
- 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease'
+    });
+  }, []);
 
   return (
     <div className="about-container">
-      <div className="about-header" >
+      <div className="about-header" data-aos"fade-down">
         <div className="header-content">
           <img src={Logo} alt="Sayt Logosu" className="site-logo" />
           <div className="header-text">
@@ -21,7 +28,7 @@ const About = () => {
       </div>
 
       <div className="about-content">
-        <section className="intro-section" >
+        <section className="intro-section">
           <h2>Haqqımızda</h2>
           <p>
             Maliyyə İdarəetmə Sistemi, büdcənizi effektiv idarə etmək, xərclərinizi izləmək və 
@@ -34,38 +41,38 @@ const About = () => {
           </div>
         </section>
 
-        <section className="features-section" >
+        <section className="features-section"0">
           <h2>Üstünlüklərimiz</h2>
           <div className="features-grid">
-            <div className="feature-card" >
+            <div className="feature-card"0">
               <div className="feature-icon">
                 <FaChartLine />
               </div>
               <h3>Real vaxt rejimində balans izləmə</h3>
               <p>Bütün maliyyə əməliyyatlarınızı canlı olaraq izləyin və anında hərtərəfli hesabatlar əldə edin.</p>
             </div>
-            <div className="feature-card" >
+            <div className="feature-card"0">
               <div className="feature-icon">
                 <FaWallet />
               </div>
               <h3>Xərc və gəlir qeydləri</h3>
               <p>Bütün gəlir və xərclərinizin təfərrüatlı qeydiyyatını aparın və kateqoriyalarla izləyin.</p>
             </div>
-            <div className="feature-card" >
+            <div className="feature-card"0">
               <div className="feature-icon">
                 <FaUserCog />
               </div>
               <h3>Şəxsi profil idarəetmə</h3>
               <p>Öz profilinizi fərdiləşdirin və şəxsi maliyyə məqsədlərinizə uyğun parametrləri tənzimləyin.</p>
             </div>
-            <div className="feature-card" >
+            <div className="feature-card"0">
               <div className="feature-icon">
                 <FaFileExcel />
               </div>
               <h3>Excel ilə inteqrasiya</h3>
               <p>Maliyyə məlumatlarınızı asanlıqla Excel-ə ixrac edin və ya mövcud məlumatlarınızı idxal edin.</p>
             </div>
-            <div className="feature-card" >
+            <div className="feature-card"0">
               <div className="feature-icon">
                 <FaShieldAlt />
               </div>
@@ -75,7 +82,7 @@ const About = () => {
           </div>
         </section>
 
-        <section className="testimonials-section" >
+        <section className="testimonials-section"0">
           <h2>Müştərilərimizin Rəyləri</h2>
           <div className="testimonials-carousel">
             <div className="testimonial-card">
@@ -90,7 +97,7 @@ const About = () => {
           </div>
         </section>
 
-        <section className="contact-section" >
+        <section className="contact-section"0">
           <h2>Bizimlə Əlaqə</h2>
           <div className="contact-cards">
             <div className="contact-card">
@@ -117,7 +124,7 @@ const About = () => {
           </div>
         </section>
 
-        <div className="about-footer" >
+        <div className="about-footer" data-aos="fade-up" data-aos-delay="600">
           <div className="footer-content">
             <div className="footer-logo">
               <img src={Logo} alt="Sayt Logosu" className="footer-site-logo" />

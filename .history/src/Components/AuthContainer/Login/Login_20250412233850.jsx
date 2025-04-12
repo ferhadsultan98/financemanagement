@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../../Styles/AuthContainer.scss";
+
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -127,7 +127,7 @@ const Login = () => {
       await updateDoc(credentialDocRef, { password: newPassword });
 
       // Send new password to email
-      const response = await axios.post("/send-password", {
+      const response = await axios.post("http://localhost:5000/send-password", {
         username: resetUsername,
         newPassword,
       });

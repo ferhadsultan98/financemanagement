@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../Styles/About.scss';
 import Logo from '../../assets/logo.png';
 import { FaChartLine, FaWallet, FaUserCog, FaFileExcel, FaShieldAlt, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const About = () => {
  

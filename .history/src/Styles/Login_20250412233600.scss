@@ -1,0 +1,101 @@
+@import "../assets/Fonts/fonts.scss";
+
+  .homeLoader {
+    width: fit-content;
+    margin: auto;
+    font-size: 4rem;
+    font-family: monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #0000;
+    -webkit-text-stroke: 1px #fff;
+    --g: conic-gradient(#fff 0 0) no-repeat text;
+    background: var(--g) 0, var(--g) 1ch, var(--g) 2ch, var(--g) 3ch, var(--g) 4ch,
+      var(--g) 5ch, var(--g) 6ch;
+    background-position-y: 100%;
+    animation: l15 3s infinite;
+  }
+  
+  .homeLoader:before {
+    content: "FINANCE";
+  }
+  
+  @keyframes l15 {
+    0% {
+      background-size: 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0;
+    }
+    14.28% {
+      background-size: 1ch 100%, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0;
+    }
+    28.57% {
+      background-size: 1ch 100%, 1ch 100%, 1ch 0, 1ch 0, 1ch 0, 1ch 0, 1ch 0;
+    }
+    42.85% {
+      background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 0, 1ch 0, 1ch 0, 1ch 0;
+    }
+    57.14% {
+      background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 0, 1ch 0, 1ch 0;
+    }
+    71.43% {
+      background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 0,
+        1ch 0;
+    }
+    85.71% {
+      background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%,
+        1ch 0;
+    }
+    100% {
+      background-size: 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%, 1ch 100%,
+        1ch 100%;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    padding: 15px;
+    
+    .dashboard-title {
+      font-size: 24px;
+    }
+    
+    .summary-card {
+      padding: 15px;
+      
+      .card-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .card-content {
+        .card-value {
+          font-size: 20px;
+        }
+      }
+    }
+    
+    .chart-container, .transactions-container {
+      padding: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+    
+    .dashboard-title {
+      font-size: 20px;
+    }
+    
+    .summary-cards {
+      grid-template-columns: 1fr;
+    }
+    
+    .chart-wrapper {
+      height: 250px;
+    }
+    
+    .transaction-category {
+      width: 32px;
+      height: 32px;
+    }
+  }

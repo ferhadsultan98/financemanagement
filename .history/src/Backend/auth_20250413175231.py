@@ -7,19 +7,12 @@ from flask_cors import CORS
 import datetime
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 SENDER_NAME = 'Finance'
 
-# Firebase yapılandırması
-try:
-    cred = credentials.Certificate("src/Backend/finance.json")
-    initialize_app(cred)
-    print("Firebase initialized successfully")
-except Exception as e:
-    print(f"Firebase initialization error: {str(e)}")
-    raise e
-
+cred = credentials.Certificate("src/Backend/finance.json")
+initialize_app(cred)
 db = firestore.client()
 
 def generate_otp():
@@ -66,33 +59,28 @@ def send_password():
 
         content = (
             f"Hörmətli istifadəçi,\n\n"
-            f"Sizin yeni şifrəniz aşağıda göstərilmişdir:\n\n"
-            f"Yeni Şifrə: {new_password}\n\n"
-            f"Bu şifrə ilə hesabınıza daxil ola bilərsiniz. Şifrənizi təhlükəsiz saxlamağınızı və heç kimsə ilə paylaşmamağınızı tövsiyə edirik.\n"
-            f"Maliyyə dünyasında uğurlu addımlar atmağınız üçün buradayıq!\n\n"
+            f"Şifrəniz uğurla yeniləndi. Yeni şifrəniz ilə hesabınıza daxil ola bilərsiniz.\n"
+            f"Təhlükəsizlik üçün şifrənizi heç kimsə ilə paylaşmayın.\n\n"
             f"Təşəkkürlər,\n{SENDER_NAME} Komandası"
         )
         html_content = f"""
         <html>
         <body style="font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; background: linear-gradient(135deg, #e0eafc, #cfdef3); margin: 0;">
             <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
-                <h2 style="color: #2c3e50; text-align: center; font-size: 28px; margin-bottom: 20px;">Yeni Şifrəniz</h2>
+                <h2 style="color: #2c3e50; text-align: center; font-size: 28px; margin-bottom: 20px;">Şifrə Yeniləmə Uğurlu</h2>
                 <p style="color: #7f8c8d; font-size: 16px;">Hörmətli istifadəçi,</p>
-                <p style="color: #2c3e50; font-size: 16px; line-height: 1.6;">Sizin üçün yeni şifrə təyin edilmişdir. Aşağıdakı şifrə ilə hesabınıza daxil ola bilərsiniz:</p>
-                <p style="text-align: center; font-size: 32px; font-weight: bold; color: #007bff; margin: 25px 0; background: #f1f8ff; padding: 15px; border-radius: 8px;">
-                    {new_password}
-                </p>
-                <p style="color: #7f8c8d; font-size: 16px; line-height: 1.6;">Təhlükəsizlik üçün şifrənizi heç kimsə ilə paylaşmayın və müntəzəm olaraq dəyişdirin.</p>
+                <p style="color: #2c3e50; font-size: 16px; line-height: 1.6;">Şifrəniz uğurla yeniləndi. Yeni şifrəniz ilə hesabınıza daxil ola bilərsiniz.</p>
+                <p style="color: #7f8c8d; font-size: 16px; line-height: 1.6;">Təhlükəsizlik üçün şifrənizi heç kimsə ilə paylaşmayın.</p>
                 <p style="color: #2c3e50; font-size: 16px; line-height: 1.6;">Maliyyə hədəflərinizə çatmaq üçün {SENDER_NAME} olaraq sizinləyik!</p>
                 <p style="color: #7f8c8d; text-align: center; margin-top: 30px; font-size: 15px;">Hörmətlə,<br><strong>{SENDER_NAME} Komandası</strong></p>
             </div>
         </body>
         </html>
         """
-        if send_email(email, 'Yeni Şifrəniz', content, html_content):
+        if send_email(email, 'Şifrə Yeniləmə Uğurlu', content, html_content):
             return jsonify({'message': 'Yeni şifrə uğurla göndərildi'}), 200
         else:
-            return jsonify({'error': 'Şifrə göndərilə bilmədi'}), 500
+            return jsonify({'error': 'E-poçt göndərilə bilmədi'}), 500
     except Exception as e:
         print("Send password error:", e)
         return jsonify({'error': 'Server xətası'}), 500
@@ -107,11 +95,7 @@ def send_otp():
         return jsonify({'error': 'İstifadəçi adı və e-poçt tələb olunur'}), 400
 
     try:
-        print(f"Generating OTP for username: {username}, email: {email}")
         otp = generate_otp()
-        print(f"Generated OTP: {otp}")
-
-        print("Attempting to write OTP to Firestore...")
         otp_ref = db.collection('otps').document(username)
         otp_ref.set({
             'otp': otp,
@@ -119,7 +103,6 @@ def send_otp():
             'created_at': datetime.datetime.utcnow(),
             'expires_at': datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
         })
-        print("OTP successfully written to Firestore")
 
         content = (
             f"Hörmətli istifadəçi,\n\n"
@@ -147,15 +130,12 @@ def send_otp():
         </body>
         </html>
         """
-        print("Sending OTP email...")
         if send_email(email, 'Qeydiyyat Doğrulama Kodu', content, html_content):
-            print("OTP email sent successfully")
             return jsonify({'message': 'OTP uğurla göndərildi'}), 200
         else:
-            print("Failed to send OTP email")
             return jsonify({'error': 'OTP göndərilə bilmədi'}), 500
     except Exception as e:
-        print(f"Send OTP error: {str(e)}")
+        print("Send OTP error:", e)
         return jsonify({'error': 'Server xətası'}), 500
 
 @app.route('/verify-otp', methods=['POST'])
@@ -178,11 +158,9 @@ def verify_otp():
         expires_at = otp_data.get('expires_at')
         email = otp_data.get('email')
 
-        # Firestore Timestamp zaten bir datetime türevi, sadece tzinfo'yu kaldır
         expires_at_naive = expires_at.replace(tzinfo=None)
         current_time = datetime.datetime.utcnow()
 
-        # Zaman karşılaştırması
         if expires_at_naive < current_time:
             otp_ref.delete()
             return jsonify({'error': 'OTP-ın vaxtı bitmişdir'}), 400
@@ -190,7 +168,6 @@ def verify_otp():
         if otp != stored_otp:
             return jsonify({'error': 'Yanlış OTP'}), 400
 
-        # OTP doğrulandı, kaydı sil
         otp_ref.delete()
         return jsonify({
             'message': 'OTP uğurla doğrulandı',
@@ -206,20 +183,16 @@ def send_welcome():
     data = request.get_json()
     username = data.get('username')
     email = data.get('email')
-    password = data.get('password')
 
-    if not all([username, email, password]):
-        return jsonify({'error': 'İstifadəçi adı, e-poçt və şifrə tələb olunur'}), 400
+    if not all([username, email]):
+        return jsonify({'error': 'İstifadəçi adı və e-poçt tələb olunur'}), 400
 
     try:
         content = (
             f"Hörmətli {username},\n\n"
             f"{SENDER_NAME} ailəsinə xoş gəlmisiniz!\n\n"
             f"Sizin qeydiyyatınız uğurla tamamlandı. Artıq maliyyə dünyasında yeni imkanlar kəşf etməyə hazırsınız!\n\n"
-            f"Hesab məlumatlarınız:\n"
             f"İstifadəçi adı: {username}\n"
-            f"Şifrə: {password}\n\n"
-            f"Bu məlumatları təhlükəsiz saxlayın və heç kimsə ilə paylaşmayın.\n"
             f"Bizimlə maliyyə həyatınızı daha rahat və uğurlu idarə edəcəksiniz. Hər hansı bir sualınız olarsa, dəstək komandamız sizinlədir!\n\n"
             f"Uğurlar arzulayırıq!\n"
             f"Təşəkkürlər,\n{SENDER_NAME} Komandası"
@@ -234,9 +207,8 @@ def send_welcome():
                 <div style="background: #f1f8ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
                     <p style="color: #2c3e50; font-size: 16px; margin: 0;"><strong>Hesab Məlumatlarınız:</strong></p>
                     <p style="color: #007bff; font-size: 18px; margin: 10px 0;">İstifadəçi adı: {username}</p>
-                    <p style="color: #007bff; font-size: 18px; margin: 10px 0;">Şifrə: {password}</p>
                 </div>
-                <p style="color: #7f8c8d; font-size: 16px; line-height: 1.6;">Təhlükəsizlik üçün bu məlumatları heç kimsə ilə paylaşmayın. Maliyyə həyatınızı daha effektiv idarə etmək üçün {SENDER_NAME} platforması sizinlədir!</p>
+                <p style="color: #2c3e50; font-size: 16px; line-height: 1.6;">Maliyyə həyatınızı daha effektiv idarə etmək üçün {SENDER_NAME} platforması sizinlədir!</p>
                 <p style="color: #2c3e50; font-size: 16px; line-height: 1.6;">Hər hansı bir sualınız olarsa, dəstək komandamız hər zaman sizin üçün buradadır.</p>
                 <p style="color: #7f8c8d; text-align: center; margin-top: 30px; font-size: 15px;">Uğurlar və maliyyə azadlığı arzulayırıq!<br><strong>{SENDER_NAME} Komandası</strong></p>
             </div>

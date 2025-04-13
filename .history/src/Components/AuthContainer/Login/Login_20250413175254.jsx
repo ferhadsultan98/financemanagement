@@ -23,7 +23,7 @@ const Login = () => {
   const [success, setSuccess] = useState("");
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [showResetForm, setShowResetForm] = useState(false);
-  const [resetUsername, setResetUsername] = useState(""); // New state for reset username
+  const [resetUsername, setResetUsername] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -80,7 +80,6 @@ const Login = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      // Validate inputs
       if (newPassword !== confirmNewPassword) {
         setError(t("login.reset.mismatch"));
         return;
@@ -90,7 +89,6 @@ const Login = () => {
         return;
       }
 
-      // Find user in Firestore
       const credentialsRef = collection(db, "credentials");
       const querySnapshot = await getDocs(credentialsRef);
       let userEmail = null;
@@ -117,20 +115,22 @@ const Login = () => {
         return;
       }
 
-      // Update Firebase Authentication
       const userCredential = await signInWithEmailAndPassword(auth, userEmail, oldPassword);
       const user = userCredential.user;
       await updatePassword(user, newPassword);
 
-      // Update Firestore
       const credentialDocRef = doc(db, "credentials", userDocId);
       await updateDoc(credentialDocRef, { password: newPassword });
 
-      // Send new password to email
       const response = await axios.post("http://localhost:5000/send-password", {
         username: resetUsername,
         newPassword,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
       if (response.data.message) {
         setSuccess(t("login.reset.success"));
         setError("");

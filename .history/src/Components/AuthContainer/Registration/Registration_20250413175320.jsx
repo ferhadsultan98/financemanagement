@@ -70,11 +70,15 @@ const Registration = ({ setActiveForm }) => {
 
       setRegistrationData({ username, fullName, email, password });
 
-      // Backend'in çalıştığı portu (5000) açıkça belirtiyoruz
       const response = await axios.post("http://localhost:5000/send-otp", {
         username,
         email,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
       if (response.data.message) {
         setShowOTPForm(true);
         setSuccess(t("registration.otp_sent"));
@@ -89,11 +93,15 @@ const Registration = ({ setActiveForm }) => {
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
     try {
-      // Backend'in çalıştığı portu (5000) açıkça belirtiyoruz
       const response = await axios.post("http://localhost:5000/verify-otp", {
         username: registrationData.username,
         otp,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
       if (response.data.message) {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -101,14 +109,14 @@ const Registration = ({ setActiveForm }) => {
           registrationData.password
         );
         const userId = userCredential.user.uid;
-  
+
         const newUserRef = doc(db, "credentials", registrationData.username);
         await setDoc(newUserRef, {
           username: registrationData.username,
           email: registrationData.email,
           password: registrationData.password,
         });
-  
+
         await set(ref(realtimeDb, `users/${userId}`), {
           profile: {
             fullName: registrationData.fullName,
@@ -121,20 +129,22 @@ const Registration = ({ setActiveForm }) => {
           balance: 0,
           username: registrationData.username,
         });
-  
-        // Hoş geldin e-postasını gönder
+
         await axios.post("http://localhost:5000/send-welcome", {
           username: registrationData.username,
           email: registrationData.email,
-          password: registrationData.password,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
-  
+
         setSuccess(t("registration.success"));
         setError("");
         setShowOTPForm(false);
         setRegistrationData(null);
         setOtp("");
-  
+
         setTimeout(() => {
           setActiveForm("login");
         }, 2000);

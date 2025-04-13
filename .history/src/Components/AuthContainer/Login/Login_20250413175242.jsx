@@ -23,7 +23,7 @@ const Login = () => {
   const [success, setSuccess] = useState("");
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [showResetForm, setShowResetForm] = useState(false);
-  const [resetUsername, setResetUsername] = useState(""); // New state for reset username
+  const [resetUsername, setResetUsername] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -80,7 +80,6 @@ const Login = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      // Validate inputs
       if (newPassword !== confirmNewPassword) {
         setError(t("login.reset.mismatch"));
         return;
@@ -90,7 +89,6 @@ const Login = () => {
         return;
       }
 
-      // Find user in Firestore
       const credentialsRef = collection(db, "credentials");
       const querySnapshot = await getDocs(credentialsRef);
       let userEmail = null;
@@ -117,20 +115,22 @@ const Login = () => {
         return;
       }
 
-      // Update Firebase Authentication
       const userCredential = await signInWithEmailAndPassword(auth, userEmail, oldPassword);
       const user = userCredential.user;
       await updatePassword(user, newPassword);
 
-      // Update Firestore
       const credentialDocRef = doc(db, "credentials", userDocId);
       await updateDoc(credentialDocRef, { password: newPassword });
 
-      // Send new password to email
       const response = await axios.post("http://localhost:5000/send-password", {
         username: resetUsername,
         newPassword,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
       if (response.data.message) {
         setSuccess(t("login.reset.success"));
         setError("");
@@ -248,49 +248,4 @@ const Login = () => {
           <div className="input-group password-group">
             <input
               type={showNewPassword ? "text" : "password"}
-              placeholder={t("login.reset.new_password")}
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-            />
-            <span
-              className="password-toggle"
-              onClick={() => setShowNewPassword(!showNewPassword)}
-            >
-              {showNewPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          </div>
-
-          <div className="input-group password-group">
-            <input
-              type={showConfirmNewPassword ? "text" : "password"}
-              placeholder={t("login.reset.confirm_new_password")}
-              value={confirmNewPassword}
-              onChange={(e) => setConfirmNewPassword(e.target.value)}
-              required
-            />
-            <span
-              className="password-toggle"
-              onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}
-            >
-              {showConfirmNewPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          </div>
-
-          <div className="reset-options">
-            <button
-              type="button"
-              className="back-btn"
-              onClick={handleBackToLogin}
-            >
-              {t("login.back")}
-            </button>
-            <button type="submit">{t("login.reset.submit")}</button>
-          </div>
-        </form>
-      )}
-    </div>
-  );
-};
-
-export default Login;
+              placeholde

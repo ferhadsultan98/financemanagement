@@ -12,14 +12,8 @@ CORS(app)
 SENDER_NAME = 'Finance'
 
 # Firebase yapılandırması
-try:
-    cred = credentials.Certificate("src/Backend/finance.json")
-    initialize_app(cred)
-    print("Firebase initialized successfully")
-except Exception as e:
-    print(f"Firebase initialization error: {str(e)}")
-    raise e
-
+cred = credentials.Certificate("./finance.json")
+initialize_app(cred)
 db = firestore.client()
 
 def generate_otp():
@@ -107,11 +101,7 @@ def send_otp():
         return jsonify({'error': 'İstifadəçi adı və e-poçt tələb olunur'}), 400
 
     try:
-        print(f"Generating OTP for username: {username}, email: {email}")
         otp = generate_otp()
-        print(f"Generated OTP: {otp}")
-
-        print("Attempting to write OTP to Firestore...")
         otp_ref = db.collection('otps').document(username)
         otp_ref.set({
             'otp': otp,
@@ -119,7 +109,6 @@ def send_otp():
             'created_at': datetime.datetime.utcnow(),
             'expires_at': datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
         })
-        print("OTP successfully written to Firestore")
 
         content = (
             f"Hörmətli istifadəçi,\n\n"
@@ -147,15 +136,12 @@ def send_otp():
         </body>
         </html>
         """
-        print("Sending OTP email...")
         if send_email(email, 'Qeydiyyat Doğrulama Kodu', content, html_content):
-            print("OTP email sent successfully")
             return jsonify({'message': 'OTP uğurla göndərildi'}), 200
         else:
-            print("Failed to send OTP email")
             return jsonify({'error': 'OTP göndərilə bilmədi'}), 500
     except Exception as e:
-        print(f"Send OTP error: {str(e)}")
+        print("Send OTP error:", e)
         return jsonify({'error': 'Server xətası'}), 500
 
 @app.route('/verify-otp', methods=['POST'])

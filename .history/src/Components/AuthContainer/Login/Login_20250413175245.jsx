@@ -127,7 +127,7 @@ const Login = () => {
       await updateDoc(credentialDocRef, { password: newPassword });
 
       // Send new password to email
-      const response = await axios.post("http://localhost:5000/send-password", {
+      const response = await axios.post("/send-password", {
         username: resetUsername,
         newPassword,
       });

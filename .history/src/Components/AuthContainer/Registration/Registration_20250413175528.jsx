@@ -70,8 +70,7 @@ const Registration = ({ setActiveForm }) => {
 
       setRegistrationData({ username, fullName, email, password });
 
-      // Backend'in çalıştığı portu (5000) açıkça belirtiyoruz
-      const response = await axios.post("http://localhost:5000/send-otp", {
+      const response = await axios.post("/send-otp", {
         username,
         email,
       });
@@ -89,8 +88,7 @@ const Registration = ({ setActiveForm }) => {
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
     try {
-      // Backend'in çalıştığı portu (5000) açıkça belirtiyoruz
-      const response = await axios.post("http://localhost:5000/verify-otp", {
+      const response = await axios.post("/verify-otp", {
         username: registrationData.username,
         otp,
       });
@@ -123,7 +121,7 @@ const Registration = ({ setActiveForm }) => {
         });
   
         // Hoş geldin e-postasını gönder
-        await axios.post("http://localhost:5000/send-welcome", {
+        await axios.post("/send-welcome", {
           username: registrationData.username,
           email: registrationData.email,
           password: registrationData.password,

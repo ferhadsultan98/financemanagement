@@ -19,7 +19,10 @@ try:
     if not firebase_config_json:
         raise ValueError("FIREBASE_CONFIG environment variable not set")
     
+    # Parse the JSON string into a Python dictionary
     firebase_config = json.loads(firebase_config_json)
+    
+    # Initialize Firebase with the parsed credentials
     cred = credentials.Certificate(firebase_config)
     initialize_app(cred)
     print("Firebase initialized successfully")
@@ -55,14 +58,6 @@ def send_email(receiver_email, subject, content, html_content):
     except Exception as e:
         print("Email sending error:", e)
         return False
-
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify({'message': 'Finance Management API çalışıyor! Endpoint\'leri kullanmak için /send-otp, /verify-otp, /send-password veya /send-welcome yollarını deneyin.'}), 200
-
-@app.route('/favicon.ico')
-def favicon():
-    return '', 204
 
 @app.route('/send-password', methods=['POST'])
 def send_password():
@@ -197,9 +192,11 @@ def verify_otp():
         expires_at = otp_data.get('expires_at')
         email = otp_data.get('email')
 
+        # Firestore Timestamp zaten bir datetime türevi, sadece tzinfo'yu kaldır
         expires_at_naive = expires_at.replace(tzinfo=None)
         current_time = datetime.datetime.utcnow()
 
+        # Zaman karşılaştırması
         if expires_at_naive < current_time:
             otp_ref.delete()
             return jsonify({'error': 'OTP-ın vaxtı bitmişdir'}), 400
@@ -207,11 +204,13 @@ def verify_otp():
         if otp != stored_otp:
             return jsonify({'error': 'Yanlış OTP'}), 400
 
+        # OTP doğrulandı, kaydı sil
         otp_ref.delete()
         return jsonify({
             'message': 'OTP uğurla doğrulandı',
             'email': email
         }), 200
+
     except Exception as e:
         print(f"Verify OTP error: {str(e)}")
         return jsonify({'error': f'Server xətası: {str(e)}'}), 500
@@ -267,5 +266,4 @@ def send_welcome():
         return jsonify({'error': 'Server xətası'}), 500
 
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5000))
-    app.run(debug=False, host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=5000)

@@ -58,7 +58,7 @@ def send_email(receiver_email, subject, content, html_content):
 
 @app.route('/', methods=['GET'])
 def home():
-  return jsonify({'message': 'Finance Management API is working! To use the endpoints, try /send-otp, /verify-otp, /send-password, or /send-welcome.', 'by': 'Farhad Sultanov'}), 200
+  return jsonify({'message': 'Finance Management API is working! To use the endpoints, try /send-otp, /verify-otp, /send-password, or /send-welcome.', 'signature': 'Farhad Sultanov'}), 200
 
 
 @app.route('/favicon.ico')

@@ -1,0 +1,5 @@
+Flask
+firebase-admin
+smtplib
+email-validator
+Flask-Cors

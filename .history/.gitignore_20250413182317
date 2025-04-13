@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 # .gitignore dosyana ekle:
-src/Backend/finance.json
+src/Backend/AuthContainer/config/finance.json

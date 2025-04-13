@@ -71,7 +71,7 @@ const Registration = ({ setActiveForm }) => {
       setRegistrationData({ username, fullName, email, password });
 
       // Backend'in çalıştığı portu (5000) açıkça belirtiyoruz
-      const response = await axios.post("https://financemanagement-y1q1.onrender.com/send-otp", {
+      const response = await axios.post("https://financemanagement-g7dq.onrender.com/send-otp", {
         username,
         email,
       });
@@ -90,7 +90,7 @@ const Registration = ({ setActiveForm }) => {
     e.preventDefault();
     try {
       // Backend'in çalıştığı portu (5000) açıkça belirtiyoruz
-      const response = await axios.post("https://financemanagement-y1q1.onrender.com/verify-otp", {
+      const response = await axios.post("https://financemanagement-g7dq.onrender.com/verify-otp", {
         username: registrationData.username,
         otp,
       });
@@ -123,7 +123,7 @@ const Registration = ({ setActiveForm }) => {
         });
   
         // Hoş geldin e-postasını gönder
-        await axios.post("https://financemanagement-y1q1.onrender.com/send-welcome", {
+        await axios.post("https://financemanagement-g7dq.onrender.com/send-welcome", {
           username: registrationData.username,
           email: registrationData.email,
           password: registrationData.password,

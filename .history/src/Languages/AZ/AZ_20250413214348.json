@@ -1,0 +1,86 @@
+{
+"auth": {
+  "login": ""
+  "left": {
+    "title": "Maliyyə İdarəetmə Sistemi",
+    "description": "Büdcənizə nəzarət edin, xərcləri izləyin və maliyyə hədəflərinizə çatmaq üçün ağıllı qərarlar qəbul edin.",
+    "features": {
+      "real_time": "Real vaxt balans izlənməsi",
+      "records": "Gəlir və xərclərin qeydiyyatı",
+      "profile": "Şəxsi profilin idarə olunması"
+    },
+    "footer": "© 2025 Maliyyə İdarəetməsi"
+  }
+},
+"login": {
+  "title": "Giriş",
+  "subtitle": "Sistemə daxil olmaq üçün məlumatlarınızı daxil edin",
+  "username": "İstifadəçi adı",
+  "password": "Şifrə",
+  "keep_logged_in": "Məni sistemdə saxla",
+  "forgot_password": "Şifrəni unutmusunuz",
+  "submit": "Daxil ol",
+  "back": "Geri",
+  "error": "İstifadəçi adı və ya şifrə yanlışdır!",
+  "reset": {
+    "current_password": "Cari şifrə",
+    "new_password": "Yeni şifrə",
+    "confirm_password": "Yeni şifrəni təsdiqləyin",
+    "change": "Dəyişdir",
+    "wrong_current": "Cari şifrə yanlışdır!",
+    "mismatch": "Yeni şifrə və təsdiq uyğun gəlmir!",
+    "empty": "Yeni şifrə boş ola bilməz!",
+    "success": "Şifrə uğurla dəyişdirildi!"
+  }
+}
+,
+  "registration": {
+    "title": "Qeydiyyat",
+    "subtitle": "Hesabınızı yaradın",
+    "username": "İstifadəçi adı",
+    "full_name": "Tam ad",
+    "email": "E-poçt",
+    "password": "Şifrə",
+    "confirm_password": "Şifrəni təsdiqləyin",
+    "submit": "Qeydiyyatdan keç",
+    "mismatch": "Şifrələr uyğun gəlmir",
+    "invalid_email": "Zəhmət olmasa düzgün e-poçt ünvanı daxil edin",
+    "username_exists": "Bu istifadəçi adı artıq mövcuddur",
+    "email_exists": "Bu e-poçt artıq qeydiyyatdan keçib",
+    "success": "Qeydiyyat uğurla tamamlandı!",
+    "error": "Xəta baş verdi"
+  },
+
+  "sidebar": {
+    "viewprofile": "Profilə bax",
+    "balance": "Balans",
+    "addmoney": "Məbləğ daxil et",
+    "moneyincrease": "Artır",
+    "logout": "Çıxış",
+    "logoutmessage": "Çıxış edildi",
+    "updatemessage": "Profil yeniləndi",
+    "invalidamountmessage": "Yanlış məbləğ",
+    "moneysuccessmessage": "Məbləğ uğurla daxil edildi"
+  },
+  "profilemodal": {
+    "edit": "Profil Redaktəsi",
+    "name": "Ad",
+    "surname": "Soyad",
+    "date": "Doğum Tarixi",
+    "gender": "Cins",
+    "man": "Kişi",
+    "woman": "Qadın",
+    "other": "Digər",
+    "save": "Yadda Saxla",
+    "close": "Bağla"
+  },
+  "navbar": {
+    "main": "Əsas",
+    "addexpense": "Xərc əlavə et",
+    "expensedetails": "Xərc məlumatları",
+    "websiteabout": "Sayt haqqında"
+  },
+  "home": {
+    "nodata": "Hələ xərc məlumatı yoxdur"
+  }
+}

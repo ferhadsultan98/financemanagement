@@ -1,0 +1,505 @@
+// Sidebar.scss
+@import 'variables';
+
+// Variables
+$sidebar-width: 280px;
+$sidebar-bg: linear-gradient(135deg, #2c3e50, #1a2639);
+$sidebar-text: #f5f5f5;
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$transition-speed: 0.3s;
+$border-radius: 8px;
+$box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin hover-effect {
+  transition: all $transition-speed ease;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 767px) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media only screen and (min-width: 1024px) {
+      @content;
+    }
+  }
+}
+
+// Sidebar Container
+.sidebar-container {
+  position: relative;
+  height: 100%;
+  
+  .toggle-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    @include flex-center;
+    cursor: pointer;
+    box-shadow: $box-shadow;
+    transition: all $transition-speed ease;
+    
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+    
+    @include responsive(desktop) {
+      display: none;
+    }
+  }
+}
+
+// Sidebar
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: $sidebar-width;
+  background: $sidebar-bg;
+  color: $sidebar-text;
+  z-index: 100;
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  @include flex-column;
+  
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
+  
+  @include responsive(mobile) {
+    transform: translateX(-100%);
+    transition: transform $transition-speed cubic-bezier(0.19, 1, 0.22, 1);
+    
+    &.open {
+      transform: translateX(0);
+    }
+  }
+  
+  @include responsive(tablet) {
+    width: 240px;
+    transform: translateX(-100%);
+    transition: transform $transition-speed cubic-bezier(0.19, 1, 0.22, 1);
+    
+    &.open {
+      transform: translateX(0);
+    }
+  }
+}
+
+// Sidebar Header
+.sidebar-header {
+  padding: 25px 20px;
+  @include flex-column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  h3 {
+    margin: 15px 0 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+  }
+  
+  .balance {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    
+    span {
+      font-weight: 600;
+      color: $secondary-color;
+    }
+  }
+  
+  .loader {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top: 3px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 10px 0;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+// Profile Image
+.profile-img {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid $primary-color;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .profile-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    @include flex-center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    
+    span {
+      color: white;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 0 10px;
+    }
+  }
+  
+  &:hover {
+    transform: scale(1.05);
+    
+    .profile-overlay {
+      opacity: 1;
+    }
+  }
+}
+
+// Top Up Section
+.top-up {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: $border-radius;
+  @include flex-column;
+  gap: 10px;
+  
+  input {
+    padding: 10px;
+    border-radius: $border-radius;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 100%;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  
+  button {
+    padding: 10px;
+    border-radius: $border-radius;
+    border: none;
+    background: $secondary-color;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-speed ease;
+    
+    &:hover {
+      background: darken($secondary-color, 10%);
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// Sidebar Footer
+.sidebar-footer {
+  margin-top: auto;
+  padding: 15px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: $sidebar-text;
+    border: none;
+    border-radius: $border-radius;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all $transition-speed ease;
+    
+    svg {
+      margin-right: 8px;
+    }
+    
+    &:hover {
+      background: rgba(255, 0, 0, 0.2);
+      color: #ff6b6b;
+    }
+  }
+}
+
+// Profile Modal
+.profile-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  @include flex-center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+.profile-modal {
+  background: white;
+  border-radius: $border-radius;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: slideIn 0.3s ease;
+  
+  @keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .modal-header {
+    background: $primary-color;
+    color: white;
+    padding: 15px 20px;
+    
+    h2 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+  }
+  
+  .modal-body {
+    padding: 20px;
+    
+    .form-group {
+      margin-bottom: 15px;
+      
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #333;
+      }
+      
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: $border-radius;
+        font-size: 0.9rem;
+        
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+        }
+      }
+    }
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 15px 20px;
+    background: #f7f7f7;
+    
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: $border-radius;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all $transition-speed ease;
+      
+      &.cancel {
+        background: #f1f1f1;
+        color: #666;
+        
+        &:hover {
+          background: #e1e1e1;
+        }
+      }
+      
+      &.save {
+        background: $primary-color;
+        color: white;
+        
+        &:hover {
+          background: darken($primary-color, 10%);
+        }
+      }
+      
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+// Language Switcher Styles
+.language-switcher {
+  margin-bottom: 15px;
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $border-radius;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    
+    option {
+      background: #2c3e50;
+      color: white;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+}
+
+// Toast Notifications
+.Toastify__toast-container {
+  z-index: 10000;
+}
+
+.Toastify__toast {
+  border-radius: $border-radius;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+// Animations for React Components
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+// Responsive adjustments for the main content
+.main-content {
+  transition: margin-left $transition-speed ease;
+  
+  @include responsive(desktop) {
+    margin-left: $sidebar-width;
+  }
+  
+  @include responsive(tablet) {
+    margin-left: 0;
+    
+    .sidebar.open + & {
+      margin-left: 240px;
+    }
+  }
+  
+  @include responsive(mobile) {
+    margin-left: 0;
+  }
+}
+
+// Add overlay when sidebar is open on mobile
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;
+  
+  @include responsive(mobile) {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $transition-speed ease;
+    
+    &.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}

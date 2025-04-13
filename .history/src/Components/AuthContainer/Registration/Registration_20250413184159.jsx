@@ -90,7 +90,7 @@ const Registration = ({ setActiveForm }) => {
     e.preventDefault();
     try {
       // Backend'in çalıştığı portu (5000) açıkça belirtiyoruz
-      const response = await axios.post("https://financemanagement-y1q1.onrender.com/verify-otp", {
+      const response = await axios.post("http://localhost:5000/verify-otp", {
         username: registrationData.username,
         otp,
       });
@@ -123,7 +123,7 @@ const Registration = ({ setActiveForm }) => {
         });
   
         // Hoş geldin e-postasını gönder
-        await axios.post("https://financemanagement-y1q1.onrender.com/send-welcome", {
+        await axios.post("http://localhost:5000/send-welcome", {
           username: registrationData.username,
           email: registrationData.email,
           password: registrationData.password,

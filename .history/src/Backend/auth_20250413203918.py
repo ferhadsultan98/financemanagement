@@ -9,9 +9,7 @@ from flask_cors import CORS
 import datetime
 
 app = Flask(__name__)
-
-# CORS yapılandırması: Tüm origin'lere izin ver
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
 
 SENDER_NAME = 'Finance'
 
